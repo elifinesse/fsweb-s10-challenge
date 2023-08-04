@@ -42,7 +42,14 @@ export function reducer(
       });
       return { ...state, notlar: [...state.notlar, action.payload] };
     case NOT_SIL:
-      return state;
+      localStorageStateYaz(s10chLocalStorageKey, {
+        ...state,
+        notlar: state.notlar.filter((not) => not.id !== action.payload),
+      });
+      return {
+        ...state,
+        notlar: state.notlar.filter((not) => not.id !== action.payload),
+      };
     default:
       return state;
   }

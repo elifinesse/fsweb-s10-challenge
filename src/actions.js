@@ -8,7 +8,7 @@ export function notEkle(not) {
 }
 
 export function notSil(notId) {
-  // ...
+  return { type: NOT_SIL, payload: notId };
 }
 
 export const notEkleAPI = (yeniNot) => (dispatch) => {
@@ -26,12 +26,14 @@ export const notEkleAPI = (yeniNot) => (dispatch) => {
 };
 
 export const notSilAPI = (id) => (dispatch) => {
-  console.log(id);
   axios
     .delete("https://httpbin.org/anything", { data: id })
     .then((res) => {
+      console.log(res);
       if (res.status === 200) {
         // res.data objesi içerisinden ihtiyaç duyduğunuz değeri bulun ve oluşturduğunuz notSil ile dispatch edin
+        const newNote = JSON.parse(res.data.data);
+        dispatch(notSil(newNote.id));
       }
     })
     .catch((error) => console.log(error));
