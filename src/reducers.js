@@ -40,7 +40,7 @@ export function reducer(
         ...state,
         notlar: [...state.notlar, action.payload],
       });
-      return { ...state, notlar: [...state.notlar, action.payload] };
+      return { ...state, notlar: [action.payload, ...state.notlar] };
     case NOT_SIL:
       localStorageStateYaz(s10chLocalStorageKey, {
         ...state,
